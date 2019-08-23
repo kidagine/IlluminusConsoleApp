@@ -43,9 +43,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ASCIIAnimator.cs" />
     <Compile Include="Customer.cs" />
     <Compile Include="LogInMenu.cs" />
     <Compile Include="MainMenu.cs" />
+    <Compile Include="MainModel.cs" />
+    <Compile Include="SignUpMenu.cs" />
     <Compile Include="StartUpMenu.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

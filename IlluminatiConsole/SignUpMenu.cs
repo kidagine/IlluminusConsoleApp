@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -8,11 +7,10 @@ using System.Threading.Tasks;
 
 namespace IlluminatiConsole
 {
-    class LogInMenu
+    class SignUpMenu
     {
-        private readonly string FILEPATHLOGIN = System.IO.Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName) + "\\TxtFiles\\LogInText.txt";
+        private readonly string FILEPATHSIGNUP = System.IO.Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName) + "\\TxtFiles\\SignUpText.txt";
         private readonly string FILEPATHCUSTOMERS = System.IO.Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName) + "\\TxtFiles\\CustomersText.txt";
-        private List<Customer> customersList = new List<Customer>();
         private readonly int txtNamePosition = 13;
         private readonly int txtPasswordPosition = 16;
         private readonly string placeholderNameText = "Enter name";
@@ -25,33 +23,14 @@ namespace IlluminatiConsole
         public void Initialize()
         {
             Console.Clear();
-            LoadData();
-            ShowLogIn();
+            ShowSignIn();
             Console.ReadLine();
         }
 
-        private void LoadData()
+        private void ShowSignIn()
         {
-            using (StreamReader srCustomer = new StreamReader(FILEPATHCUSTOMERS))
-            {
-                string lineCustomer = "";
-                while ((lineCustomer = srCustomer.ReadLine()) != null)
-                {
-                    if (!String.IsNullOrEmpty(lineCustomer))
-                    {
-                        string[] linesCustomer = lineCustomer.Split('|');
-                        Customer customerToAdd = new Customer(int.Parse(linesCustomer[0]), linesCustomer[1], linesCustomer[2]);
-                        customersList.Add(customerToAdd);
-                    }
-                }
-            }
-        }
-
-        private void ShowLogIn()
-        {
-            ASCIIAnimator.Instance.CreateASCIIAnimation(FILEPATHLOGIN, 37, 2);
-            Console.SetCursorPosition(45, 20);
-            Console.WriteLine("If you want to sign up type: 420");
+            ASCIIAnimator.Instance.CreateASCIIAnimation(FILEPATHSIGNUP, 40, 2);
+            Console.SetCursorPosition(20, 20);
             AllowInput();
         }
 
@@ -105,12 +84,6 @@ namespace IlluminatiConsole
                         Console.SetCursorPosition((Console.WindowWidth - placeholderNameText.Length) / 2, txtNamePosition);
                         Console.Write(placeholderNameText);
                     }
-                    else if (name.Equals("420"))
-                    {
-                        Console.Clear();
-                        SignUpMenu signUpMenu = new SignUpMenu();
-                        signUpMenu.Initialize();
-                    }
                     if (password.Equals(placeholderPasswordText) || password.Equals(""))
                     {
                         Console.SetCursorPosition((Console.WindowWidth - placeholderPasswordText.Length) / 2, txtPasswordPosition);
@@ -128,34 +101,20 @@ namespace IlluminatiConsole
                         Console.SetCursorPosition((Console.WindowWidth - placeholderPasswordText.Length) / 2, txtPasswordPosition);
                         Console.Write(placeholderPasswordText);
                     }
-                    else if (password.Equals("420"))
-                    {
-                        Console.Clear();
-                        SignUpMenu signUpMenu = new SignUpMenu();
-                        signUpMenu.Initialize();
-                    }
                     if (name.Equals(placeholderNameText) || name.Equals(""))
                     {
                         Console.SetCursorPosition((Console.WindowWidth - placeholderNameText.Length) / 2, txtNamePosition);
                         ASCIIAnimator.Instance.ClearCurrentConsoleLine();
                     }
-                    CheckCredentials(name, password);
-                    Console.SetCursorPosition((Console.WindowWidth - textField.Length) / 2, txtNamePosition);
+                    if (!name.Equals(placeholderNameText) || !String.IsNullOrWhiteSpace(name) || !password.Equals(placeholderPasswordText) || !String.IsNullOrWhiteSpace(password))
+                    {
+                        MainModel.Instance.AddCustomer(name, password);
+                        LogInMenu logInMenu = new LogInMenu();
+                        logInMenu.Initialize();
+                    }
                 }
             }
             CheckUserInput();
-        }
-
-        private void CheckCredentials(string name, string password)
-        {
-            for (int i = 0; i < customersList.Count; i++)
-            {
-                if (name.Equals(customersList[i].Name) || password.Equals(customersList[i].Password))
-                {
-                    MainMenu mainMenu = new MainMenu();
-                    mainMenu.Initialize(name);
-                }
-            }
         }
     }
 }
