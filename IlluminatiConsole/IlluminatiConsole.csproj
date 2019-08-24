@@ -44,7 +44,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ASCIIAnimator.cs" />
-    <Compile Include="Customer.cs" />
+    <Compile Include="BE\Customer.cs" />
+    <Compile Include="BE\Video.cs" />
     <Compile Include="LogInMenu.cs" />
     <Compile Include="MainMenu.cs" />
     <Compile Include="MainModel.cs" />

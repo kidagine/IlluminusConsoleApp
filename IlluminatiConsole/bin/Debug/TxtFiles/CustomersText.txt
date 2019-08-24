@@ -6,3 +6,6 @@
 4|ds|sx
 5||sdak
 6||kdsa
+7|ori|blind
+8|Nopo|iks
+9|Alien|Horror

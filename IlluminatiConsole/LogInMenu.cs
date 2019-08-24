@@ -150,7 +150,7 @@ namespace IlluminatiConsole
         {
             for (int i = 0; i < customersList.Count; i++)
             {
-                if (name.Equals(customersList[i].Name) || password.Equals(customersList[i].Password))
+                if (name.Equals(customersList[i].Name) && password.Equals(customersList[i].Password))
                 {
                     MainMenu mainMenu = new MainMenu();
                     mainMenu.Initialize(name);
