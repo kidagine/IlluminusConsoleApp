@@ -62,7 +62,7 @@ namespace IlluminatiConsole
                 {
                     spacingBetween += " ";
                 }
-                string videoListing = ($"|   {v.Id}         {v.Name}{spacingBetween}{v.Genre}");
+                string videoListing = ($"|  {v.Id}         {v.Name}{spacingBetween}{v.Genre}");
                 Console.SetCursorPosition(18, countTop);
                 Console.WriteLine(videoListing);
                 countTop++;
@@ -76,6 +76,26 @@ namespace IlluminatiConsole
             Console.SetCursorPosition(0, 0);
             Console.WriteLine(" ");
             ClearGivenConsoleLine();
+        }
+
+        private void ClearVideoList()
+        {
+            int topCount = 9;
+            for (int i = 0; i < 21; i++)
+            {
+                Console.SetCursorPosition(22, topCount);
+                Console.Write(new string(' ', 200));
+                topCount++;
+            }
+
+            topCount = 9;
+            int listDefaultLength = 30;
+            for (int i = 0; i < listDefaultLength; i++)
+            {
+                Console.SetCursorPosition(18, topCount);
+                Console.Write('|');
+                topCount++;
+            }
         }
 
         private void ClearGivenConsoleLine()
@@ -98,34 +118,30 @@ namespace IlluminatiConsole
             do
             {
                 while (Console.KeyAvailable == false)
-                    Thread.Sleep(250); // Loop until input is entered.
+                    Thread.Sleep(250); 
 
                 cki = Console.ReadKey(true);
                 if (cki.Key == ConsoleKey.D0)
                 {
                     allowOptionChoosing = false;
-                    AddCustomer();
+                    AddVideo();
                 }
                 else if (cki.Key == ConsoleKey.D1)
                 {
                     allowOptionChoosing = false;
-                    RemoveCustomer();
+                    RemoveVideo();
                 }
                 else if (cki.Key == ConsoleKey.D2)
                 {
                     allowOptionChoosing = false;
-                    EditCustomer();
-                }
-                else
-                {
-                    Console.WriteLine("no");
+                    EditVideo();
                 }
             } while (allowOptionChoosing);
         }
 
-        private void AddCustomer()
+        private void AddVideo()
         {
-            Console.WriteLine("-Add customer-");
+            Console.WriteLine("-Add video-");
             Console.WriteLine("Name:");
             string name = Console.ReadLine();
             Console.WriteLine("Genre:");
@@ -134,13 +150,16 @@ namespace IlluminatiConsole
             ShowVideosList();
         }
 
-        private void RemoveCustomer()
+        private void RemoveVideo()
         {
             Console.WriteLine("Select id of video");
-            string id = Console.ReadLine();
+            int id = int.Parse(Console.ReadLine());
+            MainModel.Instance.RemoveVideo(id);
+            ClearVideoList();
+            ShowVideosList();
         }
 
-        private void EditCustomer()
+        private void EditVideo()
         {
             Console.WriteLine("Select id of video");
             int id = int.Parse(Console.ReadLine());
@@ -149,6 +168,7 @@ namespace IlluminatiConsole
             Console.WriteLine("Edit Genre:");
             string genre = Console.ReadLine();
             MainModel.Instance.EditVideo(id, name, genre);
+            ClearVideoList();
             ShowVideosList();
         }
     }

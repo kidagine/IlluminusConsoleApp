@@ -1,6 +1,7 @@
 ﻿using IlluminatiConsole.BE;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -45,45 +46,65 @@ namespace IlluminatiConsole
             return videosListToReturn;
         }
 
-        public void EditVideo(int id, string name, string genre)
-        {
-            Video video = new Video(GetNextVideoId(), name, genre);
-            string videoLineEdited = video.Id.ToString() + "|" + video.Name + "|" + video.Genre;
-
-            string[] videoLines = null;
-            using (StreamReader srVideos = new StreamReader(FILEPATHVIDEOS))
-            {
-                string videoLine = "";
-                while ((videoLine = srVideos.ReadLine()) != null)
-                {
-                    if (!String.IsNullOrEmpty(videoLine))
-                    {
-                        videoLines = videoLine.Split('|');
-                    }
-                }
-                srVideos.Close();
-            }
-            using (StreamWriter srVideos = new StreamWriter(FILEPATHVIDEOS))
-            {
-                for (int currentLineId = 1; currentLineId <= videoLines.Length; ++currentLineId)
-                {
-                    if (currentLineId == id)
-                    {
-                        srVideos.WriteLine(videoLineEdited);
-                    }
-                    else
-                    {
-                        srVideos.WriteLine(videoLines[currentLineId]);
-                    }
-                }
-            }
-        }
-
         public void AddVideo(string name, string genre)
         {
             Video video = new Video(GetNextVideoId(), name, genre);
             string videoLine = video.Id.ToString() + "|" + video.Name + "|" + video.Genre;
             File.AppendAllText(FILEPATHVIDEOS, videoLine + Environment.NewLine);
+        }
+
+        public void RemoveVideo(int id)
+        {
+            using (var sr = new StreamReader(FILEPATHVIDEOS))
+            using (var sw = new StreamWriter("tempFile.txt"))
+            {
+                string line;
+                while ((line = sr.ReadLine()) != null)
+                {
+                    string[] lines = line.Split('|');
+                    if (lines[0] != id.ToString())
+                    {
+                        if (id < int.Parse(lines[0]))
+                        {
+                            int orderedId = int.Parse(lines[0]) - 1;
+                            string lineId = orderedId.ToString();
+                            line = lineId + "|" + lines[1] + "|" + lines[2];
+                            sw.WriteLine(line);
+                        }
+                        else
+                        {
+                            sw.WriteLine(line);
+                        }
+                    }
+                }
+            }
+            File.Delete(FILEPATHVIDEOS);
+            File.Move("tempFile.txt", FILEPATHVIDEOS);
+        }
+
+        public void EditVideo(int id, string name, string genre)
+        {
+            Video video = new Video(id, name, genre);
+            string videoLine = video.Id.ToString() + "|" + video.Name + "|" + video.Genre;
+            using (var sr = new StreamReader(FILEPATHVIDEOS))
+            using (var sw = new StreamWriter("tempFile.txt"))
+            {
+                string line;
+                while ((line = sr.ReadLine()) != null)
+                {
+                    string[] lines = line.Split('|');
+                    if (lines[0] != id.ToString())
+                    {
+                        sw.WriteLine(line);
+                    }
+                    else
+                    {
+                        sw.WriteLine(videoLine);
+                    }
+                }
+            }
+            File.Delete(FILEPATHVIDEOS);
+            File.Move("tempFile.txt", FILEPATHVIDEOS);
         }
 
         private int GetNextVideoId()
