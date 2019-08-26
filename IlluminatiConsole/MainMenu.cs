@@ -1,6 +1,7 @@
 ﻿using IlluminatiConsole.BE;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -74,22 +75,22 @@ namespace IlluminatiConsole
                 countTop++;
             }
             Console.SetCursorPosition(0, 0);
-            Console.WriteLine(" ");
+            Console.WriteLine("");
             ClearGivenConsoleLine();
         }
 
-        private void ClearVideoList()
+        private void ClearVideoList(int lengthToDelete = 24)
         {
             int topCount = 9;
-            for (int i = 0; i < 21; i++)
+            for (int i = 0; i < lengthToDelete  ; i++)
             {
                 Console.SetCursorPosition(22, topCount);
-                Console.Write(new string(' ', 200));
+                Console.Write(new string(' ', 500));
                 topCount++;
             }
 
             topCount = 9;
-            int listDefaultLength = 30;
+            int listDefaultLength = 21;
             for (int i = 0; i < listDefaultLength; i++)
             {
                 Console.SetCursorPosition(18, topCount);
@@ -129,19 +130,29 @@ namespace IlluminatiConsole
                 else if (cki.Key == ConsoleKey.D1)
                 {
                     allowOptionChoosing = false;
-                    RemoveVideo();
+                    DeleteVideo();
                 }
                 else if (cki.Key == ConsoleKey.D2)
                 {
                     allowOptionChoosing = false;
                     EditVideo();
                 }
+                else if (cki.Key == ConsoleKey.D3)
+                {
+                    allowOptionChoosing = false;
+                    SearchVideo();
+                }
+                else if (cki.Key == ConsoleKey.D4)
+                {
+                    allowOptionChoosing = false;
+                    ShowVideosList();
+                }
             } while (allowOptionChoosing);
         }
 
         private void AddVideo()
         {
-            Console.WriteLine("-Add video-");
+            Console.WriteLine("-Add-");
             Console.WriteLine("Name:");
             string name = Console.ReadLine();
             Console.WriteLine("Genre:");
@@ -150,8 +161,9 @@ namespace IlluminatiConsole
             ShowVideosList();
         }
 
-        private void RemoveVideo()
+        private void DeleteVideo()
         {
+            Console.WriteLine("-Delete-");
             Console.WriteLine("Select id of video");
             int id = int.Parse(Console.ReadLine());
             MainModel.Instance.RemoveVideo(id);
@@ -161,6 +173,7 @@ namespace IlluminatiConsole
 
         private void EditVideo()
         {
+            Console.WriteLine("-Edit-");
             Console.WriteLine("Select id of video");
             int id = int.Parse(Console.ReadLine());
             Console.WriteLine("Edit Name:");
@@ -170,6 +183,62 @@ namespace IlluminatiConsole
             MainModel.Instance.EditVideo(id, name, genre);
             ClearVideoList();
             ShowVideosList();
+        }
+
+        private void SearchVideo()
+        {
+            string resetText = "69";
+            List<Video> videosListFound = new List<Video>();
+            Console.WriteLine("-Search-");
+            Console.WriteLine("search by anything");
+            Console.WriteLine("type 69 reset");
+            Console.SetCursorPosition(0, 0);
+            Console.WriteLine("");
+            Console.SetCursorPosition(0, 14);
+            string textToCheck = Console.ReadLine();
+            if (textToCheck != resetText)
+            {
+                List<Video> videosList = MainModel.Instance.LoadVideosList();
+                foreach (Video v in videosList)
+                {
+                    if (v.Name.Contains(textToCheck))
+                    {
+                        videosListFound.Add(v);
+                    }
+                }
+                ClearVideoList(videosList.Count * 2);
+                int countTop = 9;
+                int maxSpacing = 46;
+                string spacingBetween = "";
+                foreach (Video v in videosListFound)
+                {
+                    if (v.Name.Contains(textToCheck))
+                    {
+                        int spacingToAdd = maxSpacing - v.Name.Length;
+                        for (int i = 0; i < spacingToAdd; i++)
+                        {
+                            spacingBetween += " ";
+                        }
+                        string videoListing = ($"|  {v.Id}         {v.Name}{spacingBetween}{v.Genre}");
+                        Console.SetCursorPosition(18, countTop);
+                        Console.WriteLine(videoListing);
+                        countTop++;
+                        spacingBetween = "";
+
+                        string spacingText = "|----------------------------------------------------------------------------------------------------";
+                        Console.SetCursorPosition(18, countTop);
+                        Console.WriteLine(spacingText);
+                        countTop++;
+                    }
+                }
+            }
+            else
+            {
+                ShowVideosList();
+            }
+            Console.SetCursorPosition(0, 9);
+            Console.WriteLine("");
+            SearchVideo();
         }
     }
 }

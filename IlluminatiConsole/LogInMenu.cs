@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IlluminatiConsole
 {
@@ -93,56 +89,61 @@ namespace IlluminatiConsole
 
         private void CheckUserInput()
         {
-            while (Console.ReadKey(true).Key != ConsoleKey.Enter)
+            if (Console.CursorTop == txtNamePosition)
             {
-                if (Console.CursorTop == txtNamePosition)
+                string tempName = Console.ReadLine();
+                if (!String.IsNullOrEmpty(tempName))
                 {
-                    name = Console.ReadLine();
-                    if (name.Equals(placeholderNameText) || name.Equals(""))
-                    {
-                        Console.SetCursorPosition((Console.WindowWidth - placeholderNameText.Length) / 2, txtNamePosition);
-                        ASCIIAnimator.Instance.ClearCurrentConsoleLine();
-                        Console.SetCursorPosition((Console.WindowWidth - placeholderNameText.Length) / 2, txtNamePosition);
-                        Console.Write(placeholderNameText);
-                    }
-                    else if (name.Equals("420"))
-                    {
-                        Console.Clear();
-                        SignUpMenu signUpMenu = new SignUpMenu();
-                        signUpMenu.Initialize();
-                    }
-                    if (password.Equals(placeholderPasswordText) || password.Equals(""))
-                    {
-                        Console.SetCursorPosition((Console.WindowWidth - placeholderPasswordText.Length) / 2, txtPasswordPosition);
-                        ASCIIAnimator.Instance.ClearCurrentConsoleLine();
-                    }
-                    Console.SetCursorPosition((Console.WindowWidth - textField.Length) / 2, txtPasswordPosition);
+                    name = tempName;
                 }
-                else
+                if (name.Equals(placeholderNameText) || name.Equals(""))
                 {
-                    password = Console.ReadLine();
-                    if (password.Equals(placeholderPasswordText) || password.Equals(""))
-                    {
-                        Console.SetCursorPosition((Console.WindowWidth - placeholderPasswordText.Length) / 2, txtPasswordPosition);
-                        ASCIIAnimator.Instance.ClearCurrentConsoleLine();
-                        Console.SetCursorPosition((Console.WindowWidth - placeholderPasswordText.Length) / 2, txtPasswordPosition);
-                        Console.Write(placeholderPasswordText);
-                    }
-                    else if (password.Equals("420"))
-                    {
-                        Console.Clear();
-                        SignUpMenu signUpMenu = new SignUpMenu();
-                        signUpMenu.Initialize();
-                    }
-                    if (name.Equals(placeholderNameText) || name.Equals(""))
-                    {
-                        Console.SetCursorPosition((Console.WindowWidth - placeholderNameText.Length) / 2, txtNamePosition);
-                        ASCIIAnimator.Instance.ClearCurrentConsoleLine();
-                    }
-                    CheckCredentials(name, password);
-                    Console.SetCursorPosition((Console.WindowWidth - textField.Length) / 2, txtNamePosition);
+                    Console.SetCursorPosition((Console.WindowWidth - placeholderNameText.Length) / 2, txtNamePosition);
+                    ASCIIAnimator.Instance.ClearCurrentConsoleLine();
+                    Console.SetCursorPosition((Console.WindowWidth - placeholderNameText.Length) / 2, txtNamePosition);
+                    Console.Write(placeholderNameText);
                 }
+                else if (name.Equals("420"))
+                {
+                    Console.Clear();
+                    SignUpMenu signUpMenu = new SignUpMenu();
+                    signUpMenu.Initialize();
+                }
+                if (password.Equals(placeholderPasswordText) || password.Equals(""))
+                {
+                    Console.SetCursorPosition((Console.WindowWidth - placeholderPasswordText.Length) / 2, txtPasswordPosition);
+                    ASCIIAnimator.Instance.ClearCurrentConsoleLine();
+                }
+                Console.SetCursorPosition((Console.WindowWidth - textField.Length) / 2, txtPasswordPosition);
             }
+            else
+            {
+                string tempPassword = Console.ReadLine();
+                if (!String.IsNullOrEmpty(tempPassword))
+                {
+                    password = tempPassword;
+                }
+                if (password.Equals(placeholderPasswordText))
+                {
+                    Console.SetCursorPosition((Console.WindowWidth - placeholderPasswordText.Length) / 2, txtPasswordPosition);
+                    ASCIIAnimator.Instance.ClearCurrentConsoleLine();
+                    Console.SetCursorPosition((Console.WindowWidth - placeholderPasswordText.Length) / 2, txtPasswordPosition);
+                    Console.Write(placeholderPasswordText);
+                }
+                else if (password.Equals("420"))
+                {
+                    Console.Clear();
+                    SignUpMenu signUpMenu = new SignUpMenu();
+                    signUpMenu.Initialize();
+                }
+                if (name.Equals(placeholderNameText) || name.Equals(""))
+                {
+                    Console.SetCursorPosition((Console.WindowWidth - placeholderNameText.Length) / 2, txtNamePosition);
+                    ASCIIAnimator.Instance.ClearCurrentConsoleLine();
+                }
+                CheckCredentials(name, password);
+                Console.SetCursorPosition((Console.WindowWidth - textField.Length) / 2, txtNamePosition);
+            }      
             CheckUserInput();
         }
 

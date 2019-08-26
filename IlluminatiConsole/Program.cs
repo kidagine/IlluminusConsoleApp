@@ -1,6 +1,5 @@
 ﻿using System;
 
-
 namespace IlluminatiConsole
 {
     class Program

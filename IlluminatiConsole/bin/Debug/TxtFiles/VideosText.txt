@@ -1,8 +1,9 @@
-1|asjkdas|asjkda2
-2|asjda|askda
-3|asdjkas|ooo
-4|aaa|aaa
-5|eee|eee
-6|a|a
-7|a|a
-8|i|i
+1|a|a
+2|ska|askd
+3|j|j
+4|asj|ask
+5|i|i
+6|kskad|ax
+7|x|x
+8|ak|ak
+9|K|K
