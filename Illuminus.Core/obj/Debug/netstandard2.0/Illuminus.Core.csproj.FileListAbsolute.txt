@@ -1,0 +1,12 @@
+C:\Users\Kiddo\Desktop\Code\C#\School\Projects\Illuminus\Illuminus.Core\bin\Debug\netstandard2.0\Illuminus.Core.Entity.dll
+C:\Users\Kiddo\Desktop\Code\C#\School\Projects\Illuminus\Illuminus.Core\obj\Debug\netstandard2.0\Illuminus.Core.csprojAssemblyReference.cache
+C:\Users\Kiddo\Desktop\Code\C#\School\Projects\Illuminus\Illuminus.Core\obj\Debug\netstandard2.0\Illuminus.Core.csproj.CoreCompileInputs.cache
+C:\Users\Kiddo\Desktop\Code\C#\School\Projects\Illuminus\Illuminus.Core\obj\Debug\netstandard2.0\Illuminus.Core.AssemblyInfoInputs.cache
+C:\Users\Kiddo\Desktop\Code\C#\School\Projects\Illuminus\Illuminus.Core\obj\Debug\netstandard2.0\Illuminus.Core.AssemblyInfo.cs
+C:\Users\Kiddo\Desktop\Code\C#\School\Projects\Illuminus\Illuminus.Core\bin\Debug\netstandard2.0\Illuminus.Core.deps.json
+C:\Users\Kiddo\Desktop\Code\C#\School\Projects\Illuminus\Illuminus.Core\bin\Debug\netstandard2.0\Illuminus.Core.dll
+C:\Users\Kiddo\Desktop\Code\C#\School\Projects\Illuminus\Illuminus.Core\bin\Debug\netstandard2.0\Illuminus.Core.pdb
+C:\Users\Kiddo\Desktop\Code\C#\School\Projects\Illuminus\Illuminus.Core\bin\Debug\netstandard2.0\Illuminus.Core.Entity.pdb
+C:\Users\Kiddo\Desktop\Code\C#\School\Projects\Illuminus\Illuminus.Core\obj\Debug\netstandard2.0\Illuminus.Core.csproj.CopyComplete
+C:\Users\Kiddo\Desktop\Code\C#\School\Projects\Illuminus\Illuminus.Core\obj\Debug\netstandard2.0\Illuminus.Core.dll
+C:\Users\Kiddo\Desktop\Code\C#\School\Projects\Illuminus\Illuminus.Core\obj\Debug\netstandard2.0\Illuminus.Core.pdb

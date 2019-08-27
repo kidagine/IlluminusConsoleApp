@@ -1,7 +1,0 @@
-C:\Users\Kiddo\Desktop\Code\C#\School\Projects\IlluminatiConsole\IlluminatiConsole\bin\Debug\IlluminatiConsole.exe.config
-C:\Users\Kiddo\Desktop\Code\C#\School\Projects\IlluminatiConsole\IlluminatiConsole\bin\Debug\IlluminatiConsole.exe
-C:\Users\Kiddo\Desktop\Code\C#\School\Projects\IlluminatiConsole\IlluminatiConsole\bin\Debug\IlluminatiConsole.pdb
-C:\Users\Kiddo\Desktop\Code\C#\School\Projects\IlluminatiConsole\IlluminatiConsole\obj\Debug\IlluminatiConsole.csprojAssemblyReference.cache
-C:\Users\Kiddo\Desktop\Code\C#\School\Projects\IlluminatiConsole\IlluminatiConsole\obj\Debug\IlluminatiConsole.csproj.CoreCompileInputs.cache
-C:\Users\Kiddo\Desktop\Code\C#\School\Projects\IlluminatiConsole\IlluminatiConsole\obj\Debug\IlluminatiConsole.exe
-C:\Users\Kiddo\Desktop\Code\C#\School\Projects\IlluminatiConsole\IlluminatiConsole\obj\Debug\IlluminatiConsole.pdb
